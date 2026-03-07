@@ -1,115 +1,138 @@
 # Crevo – AI-Powered Content Intelligence Platform
 
-Crevo is an AI-driven platform designed to help social media creators and digital brands analyze content performance, generate AI-powered content, and plan posts efficiently using a smart weekly calendar.
+Crevo is an AI-powered assistant designed to help content creators generate ideas, analyze social media posts, and plan content efficiently using intelligent automation.
 
-This project is built as a **hackathon-ready prototype** focusing on clarity, feasibility, and real-world applicability.
+The platform integrates **AI generation, content analysis, and content planning tools** into a single streamlined interface.
 
----
-
-## 🚀 Problem Statement
-
-Content creators often rely on guesswork to decide what to post, when to post, and what format works best. Existing tools are fragmented—separating analytics, content creation, and scheduling—leading to inefficiency and inconsistency.
+This project is developed as a **hackathon prototype demonstrating how AI and cloud services can assist creators in producing viral content consistently.**
 
 ---
 
-## 💡 Solution Overview
+# 🚀 Problem Statement
 
-Crevo solves this problem by combining:
-- Content performance analysis  
-- AI-powered content creation  
-- Smart content planning  
+Content creators often struggle with:
 
-into a **single unified platform**.
+• Deciding what content to create next  
+• Maintaining consistency in posting  
+• Understanding what makes content engaging  
 
-Crevo analyzes past social media performance, converts insights into actionable AI-generated content, and organizes everything into a weekly content calendar.
-
----
-
-## ✨ Key Features
-
-- Social media performance analysis (views, engagement, reach)
-- AI-powered content creation:
-  - Content ideas
-  - Video scripts
-  - Image/poster concepts
-- One-click guided “Create” workflow
-- Smart weekly content calendar
-- Unified dashboard for analytics, creation, and planning
-- Responsive UI (desktop-first, mobile-friendly)
+Most existing tools focus on **analytics or scheduling**, but very few help creators **generate ideas and plan content using AI**.
 
 ---
 
-## 🔄 Workflow
+# 💡 Solution Overview
 
-1. User logs in securely  
-2. User connects a social media account (or uses demo/sample data)  
-3. Crevo analyzes past content performance  
-4. AI generates insights and recommendations  
-5. User selects content creation mode (Idea / Video / Image)  
-6. AI generates content  
-7. Content is saved and added to the weekly calendar  
-8. User reviews and plans upcoming posts  
+Crevo acts as an **AI content strategist** for creators.
 
----
+Users can simply type a topic or paste a social media link, and Crevo will:
 
-## 🛠️ Technology Stack
+• Generate viral content ideas  
+• Suggest captions and hashtags  
+• Analyze existing social media posts  
+• Create a structured weekly content plan  
 
-### Frontend
-- React.js
-- HTML, CSS, JavaScript
-
-### Backend
-- Python
-- FastAPI
-- REST APIs
-- JWT Authentication
-
-### AI
-- Amazon Bedrock (text and image generation)
-- Prompt-based AI workflows
-
-### Database & Storage
-- Amazon DynamoDB
-- Amazon S3
-
-### Cloud & Deployment
-- AWS Lambda
-- Amazon API Gateway
-- AWS Amplify
-- Amazon CloudWatch
-
-### External APIs
-- YouTube Data API (analytics)
-- Instagram Graph API (read-only / demo)
-- Mock data where required
+This simplifies the creator workflow and reduces the time spent planning content.
 
 ---
 
-## 💰 Cost Consideration
+# ✨ Key Features
 
-The prototype is designed to run primarily on AWS Free Tier and hackathon credits, keeping implementation cost minimal. AI usage is limited to demo-level calls to ensure cost efficiency.
-
----
-
-## 📌 Project Status
-
-- Prototype / Hackathon Version
-- Core features implemented
-- Uses demo or read-only API access
-- Designed for scalability in future versions
+• AI-generated social media content ideas  
+• Caption and hashtag suggestions  
+• Social media reel/post analysis  
+• Weekly content calendar generation  
+• Chat-based interaction with AI assistant  
+• Clean and responsive creator-focused UI  
 
 ---
 
-## 🔮 Future Enhancements
+# 🔄 Workflow
 
-- Auto-posting to social media platforms
-- Advanced personalization and recommendations
-- Multi-platform scheduling
-- Monetization plans for creators and agencies
-- Enhanced analytics and trend prediction
+1. User opens the Crevo interface  
+2. User enters a topic or pastes a social media link  
+3. Crevo analyzes the request using AI  
+4. AI generates content ideas or analysis  
+5. User can generate more ideas or refine content  
+6. Crevo can generate a weekly posting calendar  
 
 ---
 
-## 📄 License
+# 🛠️ Technology Stack
+
+## Frontend
+• HTML  
+• CSS  
+• JavaScript  
+
+## Backend
+• Python  
+• AWS Lambda  
+
+## AI
+• Amazon Bedrock  
+• Meta Llama 3 model  
+
+## Cloud Infrastructure
+• Amazon API Gateway  
+• AWS Lambda  
+• AWS Amplify (frontend hosting)  
+• Amazon CloudWatch (logging)
+
+---
+
+# ☁️ System Architecture
+
+User Browser  
+↓  
+AWS Amplify (Frontend Hosting)  
+↓  
+Amazon API Gateway  
+↓  
+AWS Lambda (Backend Logic)  
+↓  
+Amazon Bedrock (AI Generation)
+
+---
+
+# 💰 Cost Consideration
+
+The prototype runs within **AWS Free Tier and hackathon credits**, making the system highly cost-efficient for demonstration and early-stage development.
+
+---
+
+# 📌 Project Status
+
+Hackathon Prototype
+
+Implemented Features:
+
+• AI content idea generation  
+• Caption and hashtag suggestions  
+• Social media post analysis  
+• Weekly content calendar generation  
+• Cloud deployment using AWS services
+
+---
+
+# 🔮 Future Enhancements
+
+• Auto-posting to social media platforms  
+• Creator analytics dashboard  
+• Trend detection and viral prediction  
+• Multi-platform scheduling  
+• Creator performance insights  
+• Monetization tools for influencers and brands  
+
+---
+
+# 🌐 Live Demo
+
+Deployed Application:
+
+https://staging.d26cpybwfaltm8.amplifyapp.com
+
+---
+
+# 📄 License
 
 This project is developed for educational and hackathon purposes.
