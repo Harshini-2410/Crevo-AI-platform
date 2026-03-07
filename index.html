@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Crevo AI</title>
+
+<style>
+
+body{
+background:#0b0616;
+font-family:Arial;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+color:white;
+}
+
+#app{
+width:720px;
+height:630px;
+background:#120a24;
+border-radius:20px;
+display:flex;
+flex-direction:column;
+overflow:hidden;
+border:1px solid #a855f7;
+box-shadow:0 0 25px rgba(168,85,247,0.4),
+           0 0 60px rgba(168,85,247,0.2);
+}
+
+#header{
+text-align:center;
+padding:20px;
+font-size:38px;
+font-weight:800;
+letter-spacing:4px;
+color:#d8b4fe;
+border-bottom:1px solid rgba(168,85,247,0.3);
+text-shadow:
+0 0 10px #a855f7,
+0 0 20px #a855f7,
+0 0 40px #9333ea;
+}
+
+#home{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:40px;
+}
+
+.mode{
+width:260px;
+height:150px;
+background:#1a0f34;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:14px;
+cursor:pointer;
+transition:0.35s;
+text-align:center;
+padding:10px;
+border:1px solid rgba(168,85,247,0.4);
+box-shadow:0 0 12px rgba(168,85,247,0.2);
+}
+
+.mode:hover{
+transform:scale(1.06);
+box-shadow:
+0 0 15px #a855f7,
+0 0 35px #9333ea;
+}
+
+#chat{
+flex:1;
+padding:20px;
+overflow-y:auto;
+display:none;
+}
+
+.message{
+padding:14px;
+border-radius:12px;
+margin:10px 0;
+max-width:70%;
+white-space:pre-line;
+}
+
+.user{
+background:#7c3aed;
+margin-left:auto;
+box-shadow:0 0 10px rgba(168,85,247,0.5);
+}
+
+.ai{
+background:#1a0f34;
+border:1px solid rgba(168,85,247,0.3);
+box-shadow:0 0 8px rgba(168,85,247,0.2);
+}
+
+#inputArea{
+display:none;
+padding:12px;
+border-top:1px solid rgba(168,85,247,0.2);
+gap:10px;
+align-items:center;
+}
+
+#userInput{
+flex:1;
+padding:12px;
+border:none;
+border-radius:10px;
+background:#1a0f34;
+color:white;
+outline:none;
+border:1px solid rgba(168,85,247,0.3);
+}
+
+#userInput:focus{
+box-shadow:0 0 10px #a855f7;
+}
+
+#plusBtn{
+background:#1a0f34;
+width:40px;
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:10px;
+cursor:pointer;
+font-size:22px;
+border:1px solid rgba(168,85,247,0.4);
+}
+
+#plusBtn:hover{
+box-shadow:0 0 10px #a855f7;
+}
+
+button{
+padding:10px 22px;
+background:#7c3aed;
+border:none;
+color:white;
+border-radius:10px;
+cursor:pointer;
+font-weight:600;
+transition:0.25s;
+box-shadow:0 0 10px rgba(168,85,247,0.5);
+}
+
+button:hover{
+background:#9333ea;
+box-shadow:
+0 0 10px #a855f7,
+0 0 25px #9333ea;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="app">
+
+<div id="header">CREVO</div>
+
+<div id="home">
+<div class="mode" onclick="startChat()">
+Start Creating with CREVO 
+</div>
+</div>
+
+<div style="text-align:center;padding:10px;">
+<button id="calendarBtn" onclick="generateCalendar()">Generate Weekly Plan 📅</button>
+</div>
+
+<div id="chat"></div>
+
+<div id="inputArea">
+
+<label for="fileUpload" id="plusBtn">+</label>
+<input type="file" id="fileUpload" multiple hidden>
+
+<input id="userInput" type="text" placeholder="Type message, paste link, etc...">
+
+<button onclick="sendMessage()">Send</button>
+
+</div>
+
+</div>
+
+<script>
+
+let lastTopic="";
+
+function startChat(){
+
+document.getElementById("home").style.display="none";
+document.getElementById("chat").style.display="block";
+document.getElementById("inputArea").style.display="flex";
+
+addMessage("Hi! Tell me what content you want to create or paste a link to analyze ","ai");
+
+}
+
+function addMessage(text,type){
+
+const chat=document.getElementById("chat");
+
+const msg=document.createElement("div");
+
+msg.className="message "+type;
+
+msg.innerText=text;
+
+chat.appendChild(msg);
+
+chat.scrollTop=chat.scrollHeight;
+
+}
+
+async function sendMessage(){
+
+const input=document.getElementById("userInput");
+
+const text=input.value.trim();
+
+const files=document.getElementById("fileUpload").files;
+
+if(text==="" && files.length===0) return;
+
+if(text!==""){
+addMessage(text,"user");
+}
+
+let topicToSend=text;
+
+if(lastTopic && (
+text.toLowerCase().includes("more") ||
+text.toLowerCase().includes("another") ||
+text.toLowerCase().includes("modify") ||
+text.toLowerCase().includes("change") ||
+text.toLowerCase().includes("shorter") ||
+text.toLowerCase().includes("hashtags")
+)){
+topicToSend=lastTopic;
+}else{
+lastTopic=text;
+}
+
+if(files.length>0){
+
+let fileMsg="Uploaded files:\n";
+
+for(let i=0;i<files.length;i++){
+fileMsg+=files[i].name+"\n";
+}
+
+addMessage(fileMsg,"user");
+
+}
+
+input.value="";
+document.getElementById("fileUpload").value="";
+
+addMessage("CREVO is thinking... ","ai");
+
+try{
+
+const url="https://oywvg6w1xb.execute-api.ap-south-1.amazonaws.com/generate?topic="+encodeURIComponent(text);
+
+const response=await fetch(url,{
+method:"GET",
+headers:{
+"Accept":"application/json"
+}
+});
+
+if(!response.ok){
+throw new Error("HTTP status "+response.status);
+}
+
+const data=await response.json();
+
+if(data && data.ideas){
+
+let result="Here are some ideas for you \n\n";
+
+const seen=new Set();
+
+data.ideas.forEach(i=>{
+
+if(!seen.has(i.title)){
+
+seen.add(i.title);
+
+const cleanTags=[...new Set(i.hashtags)].slice(0,4);
+
+result+="• "+i.title+"\n";
+result+="  Caption: "+i.caption+"\n";
+result+="  Hashtags: "+cleanTags.join(" ")+"\n\n";
+
+}
+
+});
+
+addMessage(result,"ai");
+
+}else{
+
+throw new Error("Invalid API response");
+
+}
+
+}
+
+catch(err){
+
+console.log("API error:",err);
+
+let demoIdeas=
+"Here are some viral content ideas \n\n"+
+"• 3 mistakes beginners make in fitness\n"+
+"• Morning workout routine reel\n"+
+"• Gym myth vs reality\n"+
+"• 30 second motivation reel\n"+
+"• Beginner home workout guide";
+
+addMessage(demoIdeas,"ai");
+
+}
+
+}
+
+async function generateCalendar(){
+
+if(!lastTopic) return;
+
+addMessage("Generating weekly content plan 📅","ai");
+
+try{
+
+const url="https://oywvg6w1xb.execute-api.ap-south-1.amazonaws.com/calendar?topic="+encodeURIComponent(lastTopic);
+
+const response=await fetch(url);
+
+const data=await response.json();
+
+addMessage("📅 Weekly Content Plan\n\n"+data.calendar,"ai");
+
+}catch(err){
+
+addMessage("Could not generate calendar.","ai");
+
+}
+
+}
+
+document.getElementById("userInput")
+.addEventListener("keypress",function(e){
+
+if(e.key==="Enter"){
+sendMessage();
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
